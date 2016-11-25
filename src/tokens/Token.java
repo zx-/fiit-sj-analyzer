@@ -29,4 +29,15 @@ public abstract class Token {
         return this.getName().equals(other.getName());
     }
 
+    @Override
+    public String toString(){
+        String s = isTerminal()?"Terminal: ":"NonTerminal: ";
+        return s+getName();
+    }
+
+    @Override
+    public int hashCode(){
+        return toString().hashCode();
+    }
+
 }
