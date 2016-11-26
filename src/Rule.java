@@ -32,6 +32,7 @@ public class Rule {
 
     public String toString() {
         if(isPop()) return "STACK POP Z";
+        if(isEnd()) return "END";
 
         StringBuilder b = new StringBuilder();
 

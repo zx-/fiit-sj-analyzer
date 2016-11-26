@@ -5,12 +5,15 @@ package tokens;
  */
 public abstract class Token {
 
-    private final String name;
+
+
+    private String name;
 
     Token(String name) { this.name = name; }
     abstract public boolean isNonTerminal();
     public boolean isTerminal() { return !this.isNonTerminal(); }
     public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
 
     @Override
     public boolean equals(Object obj) {

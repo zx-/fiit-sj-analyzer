@@ -19,10 +19,15 @@ public class Main {
         a.addTransition(new Terminal("<html>"),new Terminal("<html>"), Rule.createPopRule());
         a.addTransition(new Terminal("</html>"),new Terminal("</html>"), Rule.createPopRule());
 
-        List<Terminal> l2 = new ArrayList<>();
-        l2.add(new Terminal("<html>"));
-        l2.add(new Terminal("</html>"));
-        l2.add(new Terminal("$"));
-        a.analyzeInput(l2);
+        List<Terminal> allowedTerminals = new ArrayList<>();
+        allowedTerminals.add(new Terminal("<html>"));
+        allowedTerminals.add(new Terminal("</html>"));
+
+        LexicalAnalyzer la = new LexicalAnalyzer(allowedTerminals);
+        List<Terminal> inputTokens = la.getTerminalsFromString("<html><a>Ahoj</html>");
+
+        a.analyzeInput(inputTokens);
+
+
     }
 }

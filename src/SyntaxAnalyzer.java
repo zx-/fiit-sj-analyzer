@@ -40,11 +40,7 @@ public class SyntaxAnalyzer {
             currentStackToken = stack.peek();
             currentRule = (Rule) transitionTable.get(stack.peek(),currentInputToken);
 
-            System.out.println("Applying rule:");
-            System.out.println(currentRule.toString());
-            System.out.println("Stack top: "+ currentStackToken);
-            System.out.println("Current input: "+ currentInputToken.getName());
-            System.out.println();
+            printRule(currentRule,currentStackToken,currentInputToken);
 
             if(currentRule.isPop()) {
                 stack.pop();
@@ -70,25 +66,34 @@ public class SyntaxAnalyzer {
         Rule currentRule = (Rule) transitionTable.get(stackToken,currentInputToken);
 
         if(currentRule == null) {
-            System.out.println("Invalid input");
+            System.out.println("Invalid input \nno suitable rule found \n");
             printState();
 
             return false;
         }
 
         if(currentRule.isEnd()) {
-            System.out.println("Input is valid");
-            printState();
+            printRule(currentRule,stackToken,currentInputToken);
+
+            System.out.println("Input is valid \n");
             return false;
         }
 
         return true;
     }
 
+    public void printRule(Rule rule, Token stackToken, Token inputToken){
+        System.out.println("Applying rule:");
+        System.out.println("\t" + rule.toString());
+        System.out.println("Stack top: \n\t"+ stackToken);
+        System.out.println("Current input: \n\t"+ inputToken.getName());
+        System.out.println();
+    }
+
     public void printState(){
         System.out.println("Stack contents:");
-        for(Token t: stack) {
-            System.out.println("\t" + t);
+        while(!stack.empty()) {
+            System.out.println("\t" + stack.pop());
         }
         System.out.println("Input left:");
         for(Token t: inputQueue) {
