@@ -27,6 +27,8 @@ public class SyntaxAnalyzer {
 
     public void analyzeInput(List<Terminal> input) {
 
+        printTokens(input);
+
         inputQueue = new LinkedList<>(input);
         stack.push(new Terminal("#"));
         stack.push(new NonTerminal("htmldocument"));
@@ -51,6 +53,16 @@ public class SyntaxAnalyzer {
             }
 
         }
+    }
+
+    private void printTokens(List<Terminal> input) {
+        System.out.println("Analyzing tokens:");
+
+        for(Terminal t:input){
+            System.out.print(" " + t.getName());
+        }
+        System.out.println();
+        System.out.println();
     }
 
     void pushMultiple(Stack s, List<Token> tokens ) {

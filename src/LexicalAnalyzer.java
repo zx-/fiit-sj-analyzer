@@ -38,6 +38,17 @@ public class LexicalAnalyzer {
         }
 
         terminalList.add(new Terminal("$"));
+        terminalList.removeIf(terminal -> {
+            if(!terminal.isText()) return false;
+
+            for(char c :terminal.getText().toCharArray()){
+                if(!Character.isWhitespace(c))
+                    return false;
+            }
+
+            return true;
+        });
+
         return terminalList;
     }
 
@@ -65,6 +76,10 @@ public class LexicalAnalyzer {
                 l.add(b.toString());
                 b = new StringBuilder();
             }
+        }
+
+        if(b.length() != 0){
+            l.add(b.toString());
         }
 
         return l;

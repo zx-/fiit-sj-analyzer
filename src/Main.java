@@ -24,10 +24,8 @@ public class Main {
         allowedTerminals.add(new Terminal("</html>"));
 
         LexicalAnalyzer la = new LexicalAnalyzer(allowedTerminals);
-        List<Terminal> inputTokens = la.getTerminalsFromString("<html><a>Ahoj</html>");
+        List<Terminal> inputTokens = la.getTerminalsFromString(" <html> </html>   ");
 
         a.analyzeInput(inputTokens);
-
-
     }
 }
