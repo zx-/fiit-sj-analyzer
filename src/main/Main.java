@@ -31,8 +31,6 @@ public class Main {
 //
 //        a.analyzeInput(inputTokens);
 
-    
-        
     	
     	List<Terminal> allowedTerminals = new ArrayList<>();
     	allowedTerminals.add(new Terminal("<html>"));
