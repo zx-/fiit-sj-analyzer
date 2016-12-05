@@ -32,7 +32,7 @@ public class Main {
     	allowedTerminals.remove(0);
     	
     	LexicalAnalyzer la = new LexicalAnalyzer(allowedTerminals);
-    	List<Terminal> inputTokens = la.getTerminalsFromString(" <html><head></head> <body> </body> </html> ");
+    	List<Terminal> inputTokens = la.getTerminalsFromString(" <html>  a  <head><meta name= word content= word > </head> <body> </body> </html> ");
     	
     	sa.analyzeInput(inputTokens);   
     }

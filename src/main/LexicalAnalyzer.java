@@ -18,6 +18,7 @@ public class LexicalAnalyzer {
     public List<Terminal> getTerminalsFromString(String input){
         List<String> inputList = splitInput(input);
         LinkedList<Terminal> terminalList = new LinkedList<>();
+        LinkedList<Terminal> terminalCleanList = new LinkedList<>();
         Terminal candidate;
 
         for(String s:inputList) {
@@ -38,7 +39,10 @@ public class LexicalAnalyzer {
             }
         }
 
+        // add ending
         terminalList.add(new Terminal("$"));
+
+        // remove blank terminals
         terminalList.removeIf(terminal -> {
             if(!terminal.isText()) return false;
 
@@ -50,7 +54,53 @@ public class LexicalAnalyzer {
             return true;
         });
 
-        return terminalList;
+        //split TEXT into words && trim whitespace
+        terminalList.forEach(terminal ->{
+            if(terminal.isText()) {
+                String text  = terminal.getText().trim();
+                StringBuilder b = new StringBuilder();
+                Terminal t;
+
+                for(int i = 0; i<text.length(); i++) {
+                    char c = text.charAt(i);
+
+                    if(Character.isWhitespace(c)) {
+                        if(b.length() != 0){
+                            t = new Terminal(b.toString());
+
+                            if(terminals.contains(t)) {
+                                terminalCleanList.add(t);
+                            } else {
+                                t.appendText(t.getName());
+                                t.setName("WORD");
+                                terminalCleanList.add(t);
+                            }
+
+                            b = new StringBuilder();
+                        }
+                    } else {
+                        b.append(c);
+                    }
+                }
+
+                if(b.length() != 0){
+                    t = new Terminal(b.toString());
+
+                    if(terminals.contains(t)) {
+                        terminalCleanList.add(t);
+                    } else {
+                        t.appendText(t.getName());
+                        t.setName("WORD");
+                        terminalCleanList.add(t);
+                    }
+                }
+
+            } else {
+                terminalCleanList.add(terminal);
+            }
+        });
+
+        return terminalCleanList;
     }
 
     private List<String> splitInput(String s){
