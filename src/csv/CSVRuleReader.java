@@ -97,7 +97,7 @@ public class CSVRuleReader {
 	      
 	    if (m.find( )) {
 	    	// Quotes duplication, just delete the quote at the beginning and on the end of the terminal name
-	    	String termStr = tokenStr.replaceAll("^\"|\"$", "");
+	    	String termStr = tokenStr.replaceAll("\"", "");
 	        // String was found as a terminal
 	    	return new Terminal(termStr); 
 	    } else {

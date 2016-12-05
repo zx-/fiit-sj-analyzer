@@ -44,12 +44,12 @@ public class CSVStackReader {
 	    			} else {
 	    				if (row == 0) {
 	    					// get a list of terminals from the first line (header)
-	    					tmpStr = StringUtil.deleteQuotes(tmpStr, 2);
+	    					tmpStr = tmpStr.replaceAll("\"", "");
 	    					terminals.add(new Terminal(tmpStr));
 	    				}
 	    					
 	    				if (tmpStr.equals("Z")) {
-	    					Token stackToken = new Terminal(StringUtil.deleteQuotes(text[0], 2));
+	    					Token stackToken = new Terminal(text[0].replaceAll("\"", ""));
 		    				Token inputToken = terminals.get(column);
 		    				sa.addTransition(stackToken, inputToken, Rule.createPopRule());
 	    				}
