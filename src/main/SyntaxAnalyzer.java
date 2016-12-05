@@ -13,7 +13,7 @@ public class SyntaxAnalyzer {
 
     private MultiKeyMap transitionTable = new MultiKeyMap();
     Stack<Token> stack = new Stack<>();
-    Queue<Token> inputQueue;
+    Queue<Terminal> inputQueue;
 
     SyntaxAnalyzer () {
         Rule r = Rule.createEndRule();
@@ -43,6 +43,11 @@ public class SyntaxAnalyzer {
             currentStackToken = stack.peek();
             currentRule = (Rule) transitionTable.get(stack.peek(),currentInputToken);
 
+            System.out.println("Input left:");
+            for(Terminal t:inputQueue){
+                System.out.print(" " + t.getName() + (t.isText()?"("+t.getText()+")":""));
+            }
+            System.out.println();
             printRule(currentRule,currentStackToken,currentInputToken);
 
             if(currentRule.isPop()) {
