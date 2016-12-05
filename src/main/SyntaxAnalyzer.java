@@ -99,7 +99,12 @@ public class SyntaxAnalyzer {
         System.out.println("Applying rule:");
         System.out.println("\t" + rule.toString());
         System.out.println("Stack top: \n\t"+ stackToken);
-        System.out.println("Current input: \n\t"+ inputToken.getName());
+        System.out.print("Current input: \n\t"+ inputToken.getName());
+        if(((Terminal) inputToken).isText()) {
+            System.out.println(" - " + ((Terminal) inputToken).getText());
+        } else {
+            System.out.println();
+        }
         System.out.println();
     }
 
@@ -110,7 +115,12 @@ public class SyntaxAnalyzer {
         }
         System.out.println("Input left:");
         for(Token t: inputQueue) {
-            System.out.println("\t" + t.getName());
+            System.out.print("\t" + t.getName());
+            if(((Terminal) t).isText()) {
+                System.out.println(" - " + ((Terminal) t).getText());
+            } else {
+                System.out.println();
+            }
         }
     }
 }

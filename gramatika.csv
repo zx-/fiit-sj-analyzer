@@ -11,15 +11,15 @@
 8,metatag,->,"""<meta"" ""name="" ""WORD"" ""content="" ""WORD"" "">""","""<meta""","""<title>"", ""<meta"", ""</head>"""
 ,,,,,
 9,documentbody,->,"""<body>"" bodytags ""</body>""","""<body>""","""</html>"""
-10,bodytags,->,bodytag bodytags,"""<table>"", ""<ul>"", ""<ol>"", ""<dl>"", ""<p>"", ""WORD"", E","""</body>"""
+10,bodytags,->,bodytag bodytags,"""<table>"", ""<ul>"", ""<ol>"", ""<dl>"", ""<p>"", ""WORD""","""</body>"""
 11,bodytags,->,E,E,
-12,bodytag,->,table,"""<table>""","FIRST(bodytags) ""<table>"", ""<ul>"", ""<ol>"", ""<dl>"", ""<p>"", ""</body>"", FIRST(pX),  ""</p>"", FIRST(tdX), ""</td>"",""<td>"", ""</tr>"", FOLLOW(listitem) ""<li>"", ""</ul>"", ""</ol>"", FOLLOW(defterm) ""<dt>"", ""<dd>"", ""</dl>"""
+12,bodytag,->,table,"""<table>""","FIRST(bodytags) ""<table>"", ""<ul>"", ""<ol>"", ""<dl>"", ""<p>"", ""</body>"", FIRST(pX),  ""</p>"", FIRST(tdX), ""</td>"",""<td>"", ""</tr>"", FOLLOW(listitem) ""<li>"", ""</ul>"", ""</ol>"", FOLLOW(defterm) ""<dt>"", ""<dd>"", ""</dl>"", ""WORD"""
 13,bodytag,->,list,"""<ul>"", ""<ol>"", ""<dl>""",
 14,bodytag,->,paragraph,"""<p>""",
-15,bodytag,->,content ,"""WORD"", E",
+15,bodytag,->,words,"""WORD""",
 ,,,,,
 16,paragraph,->,"""<p>"" bodytag pX","""<p>""",FOLLOW(bodytag)
-17,pX,->,"""</p>""","""</p>""","FOLLOW(paragraph) FOLLOW(bodytag) ""<table>"", ""<ul>"", ""<ol>"", ""<dl>"", ""<p>"", ""</body>"",  ""</p>"",""</td>"",""<td>"", ""</tr>"",""<li>"", ""</ul>"", ""</ol>"",<dt>"", ""<dd>"", ""</dl>"""
+17,pX,->,"""</p>""","""</p>""","FIRST(bodytags) ""<table>"", ""<ul>"", ""<ol>"", ""<dl>"", ""<p>"", ""</body>"", FIRST(pX),  ""</p>"", FIRST(tdX), ""</td>"",""<td>"", ""</tr>"", FOLLOW(listitem) ""<li>"", ""</ul>"", ""</ol>"", FOLLOW(defterm) ""<dt>"", ""<dd>"", ""</dl>"", ""WORD"""
 18,pX,->,E,E,
 ,,,,,
 19,table,->,"""<table>"" tablerows ""</table>""","""<table>""",FOLLOW(bodytag)
@@ -49,7 +49,7 @@
 39,defterm,->,"""<dt>"" defterms ","""<dt>""","""<dt>"", ""<dd>"", ""</dl>"""
 40,defterm,->,"""<dd>"" bodytag","""<dd>""",
 ,,,,,
-41,content,->,words,"""WORD""","""</title>"", FIRST(bodytags), ""</body>"", ""<table>"",""<ul>"", ""<ol>"", ""<dl>"",""<p>"",""WORD"""
+41,content,->,words,"""WORD""","""</title>"", FIRST(bodytags), ""</body>"", ""<table>"",""<ul>"", ""<ol>"", ""<dl>"",""<p>"",""WORD"" ""</title>"""
 42,content,->,E,E,
 43,words,->,"""WORD"" words","""WORD""","""</title>"", FIRST(bodytags), ""</body>"", ""<table>"",""<ul>"", ""<ol>"", ""<dl>"",""<p>"",""WORD"""
 44,words,->,E,E,

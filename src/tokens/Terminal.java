@@ -16,11 +16,17 @@ public class Terminal extends Token {
         return false;
     }
 
-//    @Override
-//    public String toString() {
-//        if(text == null) return super.toString();
-//        return super.toString() + " - \"" + text+ "\"";
-//    }
+    @Override
+    public String toString() {
+        if(text == null) return super.toString();
+        return super.toString() + " - \"" + text+ "\"";
+    }
+
+
+    @Override
+    public int hashCode(){
+        return super.toString().hashCode();
+    }
 
     public void appendText(String s) { text = (text==null)? s:text+s; }
     public void appendText(Terminal t) { text += t.getText(); }

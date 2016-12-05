@@ -11,7 +11,8 @@ import tokens.Token;
 import util.FileHandlerUtil;
 
 public class Main {
-	public static final String file = "input/input1.txt";
+	public static final String INPUT_1 = "input/input1.txt";
+	public static final String INPUT_2 = "input/input2.txt";
 	
     public static void main(String[] args) {    	
     	SyntaxAnalyzer sa = new SyntaxAnalyzer();
@@ -26,9 +27,8 @@ public class Main {
     	
     	List<Terminal> inputTokens = null;
 		try {
-			inputTokens = la.getTerminalsFromString(FileHandlerUtil.loadFile(file));
+			inputTokens = la.getTerminalsFromString(FileHandlerUtil.loadFile(INPUT_2));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     			
