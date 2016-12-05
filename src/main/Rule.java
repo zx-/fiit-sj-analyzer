@@ -44,7 +44,7 @@ public class Rule {
             b.append(" ");
         }
         if(rightSide.size() == 0)
-            b.append("ε");
+            b.append("eps");
 
         return b.toString();
     }

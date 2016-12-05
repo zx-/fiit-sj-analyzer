@@ -8,15 +8,15 @@
 5,headertag,->,titletag,"""<title>""","""<title>"", ""<meta"", ""</head>"""
 6,headertag,->,metatag,"""<meta""",
 7,titletag,->,"""<title>"" content ""</title>""","""<title>""","""<title>"", ""<meta"", ""</head>"""
-8,metatag,->,"""<meta"" ""name="" word ""content="" word "">""","""<meta""","""<title>"", ""<meta"", ""</head>"""
+8,metatag,->,"""<meta"" ""name="" ""WORD"" ""content="" ""WORD"" "">""","""<meta""","""<title>"", ""<meta"", ""</head>"""
 ,,,,,
 9,documentbody,->,"""<body>"" bodytags ""</body>""","""<body>""","""</html>"""
-10,bodytags,->,bodytag bodytags,"""<table>"", ""<ul>"", ""<ol>"", ""<dl>"", ""<p>"", FIRST(CHAR), ϵ","""</body>"""
+10,bodytags,->,bodytag bodytags,"""<table>"", ""<ul>"", ""<ol>"", ""<dl>"", ""<p>"", ""WORD"", E","""</body>"""
 11,bodytags,->,E,E,
-12,bodytag,->,table,"""<table>""","""<table>"", ""<ul>"", ""<ol>"", ""<dl>"", ""<p>"", FIRST(CHAR), ""</body>"", ""</td>"", ""<dt>"", ""<dd>"", ""</dl>"""
-13,bodytag,->,list,"""<ul>"", ""<ol>"", ""<dl>""","FIRST(bodytags) ""<table>"", ""<ul>"", ""<ol>"", ""<dl>"", ""<p>"", ""</body>"", FIRST(pX),  ""</p>"", FIRST(tdX), ""</td>"",""<td>"", ""</tr>"", FOLLOW(listitem) ""<li>"", ""</ul>"", ""</ol>"", FOLLOW(defterm) ""<dt>"", ""<dd>"", ""</dl>"""
+12,bodytag,->,table,"""<table>""","FIRST(bodytags) ""<table>"", ""<ul>"", ""<ol>"", ""<dl>"", ""<p>"", ""</body>"", FIRST(pX),  ""</p>"", FIRST(tdX), ""</td>"",""<td>"", ""</tr>"", FOLLOW(listitem) ""<li>"", ""</ul>"", ""</ol>"", FOLLOW(defterm) ""<dt>"", ""<dd>"", ""</dl>"""
+13,bodytag,->,list,"""<ul>"", ""<ol>"", ""<dl>""",
 14,bodytag,->,paragraph,"""<p>""",
-15,bodytag,->,content  CHARS,"FIRST(CHAR) , epsilon",
+15,bodytag,->,content ,"""WORD"", E",
 ,,,,,
 16,paragraph,->,"""<p>"" bodytag pX","""<p>""",FOLLOW(bodytag)
 17,pX,->,"""</p>""","""</p>""","FOLLOW(paragraph) FOLLOW(bodytag) ""<table>"", ""<ul>"", ""<ol>"", ""<dl>"", ""<p>"", ""</body>"",  ""</p>"",""</td>"",""<td>"", ""</tr>"",""<li>"", ""</ul>"", ""</ol>"",<dt>"", ""<dd>"", ""</dl>"""
@@ -25,7 +25,7 @@
 19,table,->,"""<table>"" tablerows ""</table>""","""<table>""",FOLLOW(bodytag)
 20,tablerows,->,tablerow tablerows,"""<tr>""","""</table>"""
 21,tablerows,->,E,E,
-22,tablerow,->,"""<tr>"" tablecells""</tr>""","""<tr>""","""<tr>"", ""</table>"""
+22,tablerow,->,"""<tr>"" tablecells ""</tr>""","""<tr>""","""<tr>"", ""</table>"""
 23,tablecells,->,tablecell tablecells,"""<td>""","""</tr>"""
 24,tablecells,->,E,E,
 25,tablecell,->,"""<td>"" bodytag tdX","""<td>""","""<td>"", ""</tr>"""
@@ -49,19 +49,7 @@
 39,defterm,->,"""<dt>"" defterms ","""<dt>""","""<dt>"", ""<dd>"", ""</dl>"""
 40,defterm,->,"""<dd>"" bodytag","""<dd>""",
 ,,,,,
-41,content,->,words,"FIRST(CHAR), ϵ","""</title>"", FIRST(bodytags), ""</body>"""
-42,words,->,word Wx,FIRST(CHAR),
-43,Wx,->,""" "" word Wx",""" """,
-44,Wx,->,E,E,
-45,words,->,E,E,
-46,word,->,char chars,FIRST(CHAR),""" """
-47,chars,->,char chars,FIRST(CHAR),
-48,chars,->,E,E,
-49,char,->,"[0-9] [a-zA-Z] [""."" ""!"" ""?"" ....]","[0-9] [a-zA-Z] [""."" ""!"" ""?"" ....]",
-,,,,,
-50,CHARS,->,char CHARX,FIRST(CHAR),"FOLLOW(bodytag) ""<table>"", ""<ul>"", ""<ol>"", ""<dl>"", ""<p>"", ""</body>"",  ""</p>"",""</td>"",""<td>"", ""</tr>"",""<li>"", ""</ul>"", ""</ol>"",<dt>"", ""<dd>"", ""</dl>"""
-51,CHARX,->,char CHARX,CHAR,
-52,CHARX,->,E,E,
-,,,,,
-53,content,,hocaky aj prazdny string,,
-54,CHARS,,neprazdny string,,
+41,content,->,words,"""WORD""","""</title>"", FIRST(bodytags), ""</body>"", ""<table>"",""<ul>"", ""<ol>"", ""<dl>"",""<p>"",""WORD"""
+42,content,->,E,E,
+43,words,->,"""WORD"" words","""WORD""","""</title>"", FIRST(bodytags), ""</body>"", ""<table>"",""<ul>"", ""<ol>"", ""<dl>"",""<p>"",""WORD"""
+44,words,->,E,E,
