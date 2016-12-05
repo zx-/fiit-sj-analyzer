@@ -41,7 +41,10 @@ public class Rule {
         b.append(" -> ");
         for(Token t:rightSide) {
             b.append(t.getName());
+            b.append(" ");
         }
+        if(rightSide.size() == 0)
+            b.append("ε");
 
         return b.toString();
     }
