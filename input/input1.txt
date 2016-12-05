@@ -1,0 +1,7 @@
+<html>
+  <head> 
+    <meta name= "par_name" content= "par_cont" > 
+  </head> 
+  
+  <body> Skuska </body> 
+</html>
