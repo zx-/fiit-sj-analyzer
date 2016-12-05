@@ -11,8 +11,8 @@ import tokens.Token;
 import util.FileHandlerUtil;
 
 public class Main {
-	public static final String INPUT_1 = "input/input1.txt";
-	public static final String INPUT_2 = "input/input2.txt";
+	public static final String INPUT_1 = "input/input1.html";
+	public static final String INPUT_2 = "input/input2.html";
 	
     public static void main(String[] args) {    	
     	SyntaxAnalyzer sa = new SyntaxAnalyzer();
