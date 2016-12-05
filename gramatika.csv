@@ -4,7 +4,7 @@
 ,documentheader,->,"""<head>""""</head>""",,
 2,documentheader,->,"""<head>"" headertags ""</head>""","""<head>""","""<body>"""
 3,headertags,->,headertag headertags,"""<title>, ""<meta""","""</head>"""
-4,headertags,->,ϵ,ϵ,
+4,headertags,->,E,E,
 5,headertag,->,titletag,"""<title>""","""<title>"", ""<meta"", ""</head>"""
 6,headertag,->,metatag,"""<meta""",
 7,titletag,->,"""<title>"" content ""</title>""","""<title>""","""<title>"", ""<meta"", ""</head>"""
@@ -12,7 +12,7 @@
 ,,,,,
 9,documentbody,->,"""<body>"" bodytags ""</body>""","""<body>""","""</html>"""
 10,bodytags,->,bodytag bodytags,"""<table>"", ""<ul>"", ""<ol>"", ""<dl>"", ""<p>"", FIRST(CHAR), ϵ","""</body>"""
-11,bodytags,->,ϵ,ϵ,
+11,bodytags,->,E,E,
 12,bodytag,->,table,"""<table>""","""<table>"", ""<ul>"", ""<ol>"", ""<dl>"", ""<p>"", FIRST(CHAR), ""</body>"", ""</td>"", ""<dt>"", ""<dd>"", ""</dl>"""
 13,bodytag,->,list,"""<ul>"", ""<ol>"", ""<dl>""","FIRST(bodytags) ""<table>"", ""<ul>"", ""<ol>"", ""<dl>"", ""<p>"", ""</body>"", FIRST(pX),  ""</p>"", FIRST(tdX), ""</td>"",""<td>"", ""</tr>"", FOLLOW(listitem) ""<li>"", ""</ul>"", ""</ol>"", FOLLOW(defterm) ""<dt>"", ""<dd>"", ""</dl>"""
 14,bodytag,->,paragraph,"""<p>""",
@@ -20,17 +20,17 @@
 ,,,,,
 16,paragraph,->,"""<p>"" bodytag pX","""<p>""",FOLLOW(bodytag)
 17,pX,->,"""</p>""","""</p>""","FOLLOW(paragraph) FOLLOW(bodytag) ""<table>"", ""<ul>"", ""<ol>"", ""<dl>"", ""<p>"", ""</body>"",  ""</p>"",""</td>"",""<td>"", ""</tr>"",""<li>"", ""</ul>"", ""</ol>"",<dt>"", ""<dd>"", ""</dl>"""
-18,pX,->,ϵ,ϵ,
+18,pX,->,E,E,
 ,,,,,
 19,table,->,"""<table>"" tablerows ""</table>""","""<table>""",FOLLOW(bodytag)
 20,tablerows,->,tablerow tablerows,"""<tr>""","""</table>"""
-21,tablerows,->,ϵ,ϵ,
+21,tablerows,->,E,E,
 22,tablerow,->,"""<tr>"" tablecells""</tr>""","""<tr>""","""<tr>"", ""</table>"""
 23,tablecells,->,tablecell tablecells,"""<td>""","""</tr>"""
-24,tablecells,->,ϵ,ϵ,
+24,tablecells,->,E,E,
 25,tablecell,->,"""<td>"" bodytag tdX","""<td>""","""<td>"", ""</tr>"""
 26,tdX,->,"""</td>""","""</td>""","FOLLOW(tablecell) ""<td>"", ""</tr>"""
-27,tdX,->,ϵ,ϵ,
+27,tdX,->,E,E,
 ,,,,,
 28,list,->,unordered,"""<ul>""",FOLLOW(bodytag)
 29,list,->,ordered,"""<ol>""",
@@ -40,28 +40,28 @@
 32,ordered,->,"""<ol>"" listitems ""</ol>""","""<ol>""",FOLLOW(list) FOLLOW(bodytag)
 ,,,,,
 33,listitems,->,listitem listitems,"""<li>""","""</ul>"", ""</ol>"""
-34,listitems,->,ϵ,ϵ,
+34,listitems,->,E,E,
 35,listitem,->,"""<li>"" bodytag","""<li>""","""<li>"", ""</ul>"", ""</ol>"""
 ,,,,,
 36,definitionlist,->,"""<dl>"" defterms ""</dl>""","""<dl>""",FOLLOW(list) FOLLOW(bodytag)
 37,defterms,->,defterm defterms,"""<dt>"", ""<dd>""","""</dl>"""
-38,defterms,->,ϵ,ϵ,
+38,defterms,->,E,E,
 39,defterm,->,"""<dt>"" defterms ","""<dt>""","""<dt>"", ""<dd>"", ""</dl>"""
 40,defterm,->,"""<dd>"" bodytag","""<dd>""",
 ,,,,,
 41,content,->,words,"FIRST(CHAR), ϵ","""</title>"", FIRST(bodytags), ""</body>"""
 42,words,->,word Wx,FIRST(CHAR),
 43,Wx,->,""" "" word Wx",""" """,
-44,Wx,->,ϵ,ϵ,
-45,words,->,ϵ,ϵ,
+44,Wx,->,E,E,
+45,words,->,E,E,
 46,word,->,char chars,FIRST(CHAR),""" """
 47,chars,->,char chars,FIRST(CHAR),
-48,chars,->,ϵ,ϵ,
+48,chars,->,E,E,
 49,char,->,"[0-9] [a-zA-Z] [""."" ""!"" ""?"" ....]","[0-9] [a-zA-Z] [""."" ""!"" ""?"" ....]",
 ,,,,,
 50,CHARS,->,char CHARX,FIRST(CHAR),"FOLLOW(bodytag) ""<table>"", ""<ul>"", ""<ol>"", ""<dl>"", ""<p>"", ""</body>"",  ""</p>"",""</td>"",""<td>"", ""</tr>"",""<li>"", ""</ul>"", ""</ol>"",<dt>"", ""<dd>"", ""</dl>"""
 51,CHARX,->,char CHARX,CHAR,
-52,CHARX,->,ϵ,ϵ,
+52,CHARX,->,E,E,
 ,,,,,
 53,content,,hocaky aj prazdny string,,
 54,CHARS,,neprazdny string,,

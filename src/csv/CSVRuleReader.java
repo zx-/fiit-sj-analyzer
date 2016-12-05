@@ -13,6 +13,7 @@ import main.Rule;
 import tokens.NonTerminal;
 import tokens.Terminal;
 import tokens.Token;
+import util.StringUtil;
 
 public class CSVRuleReader {
 // com.csvreader.CsvReader;
@@ -73,9 +74,11 @@ public class CSVRuleReader {
 		// split rule by space 
 		String[] splited = rule.split(" ");
 		
-		if (splited.length == 0) {
+		if (splited.length == 1) {
 			// just one token in rule
-			tokens.add(determineTokenType(rule));
+			if (!rule.equals("E")) {
+				tokens.add(determineTokenType(rule));
+			}	
 		} else {
 			// more tokens in rule separated by space
 			for (String tokenStr : splited) {
