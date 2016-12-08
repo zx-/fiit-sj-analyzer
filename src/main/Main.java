@@ -13,6 +13,7 @@ import util.FileHandlerUtil;
 public class Main {
 	public static final String INPUT_1 = "input/input1.html";
 	public static final String INPUT_2 = "input/input2.html";
+	public static final String INPUT_3 = "input/input3.html";
 	public static final String BAD_1 = "input/bad_input.html";
 	
     public static void main(String[] args) {    	
@@ -28,7 +29,7 @@ public class Main {
     	
     	List<Terminal> inputTokens = null;
 		try {
-			inputTokens = la.getTerminalsFromString(FileHandlerUtil.loadFile(BAD_1));
+			inputTokens = la.getTerminalsFromString(FileHandlerUtil.loadFile(INPUT_3));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
