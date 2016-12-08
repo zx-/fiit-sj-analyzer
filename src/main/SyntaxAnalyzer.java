@@ -14,6 +14,7 @@ public class SyntaxAnalyzer {
     private MultiKeyMap transitionTable = new MultiKeyMap();
     Stack<Token> stack = new Stack<>();
     Queue<Terminal> inputQueue;
+    boolean wasError = false;
 
     SyntaxAnalyzer () {
         Rule r = Rule.createEndRule();
@@ -85,19 +86,52 @@ public class SyntaxAnalyzer {
 
         if(currentRule == null) {
             System.out.println("Invalid input \nno suitable rule found \n");
-            printState();
 
-            return false;
+            wasError = true;
+
+            if(recover()){
+                return true;
+            } else {
+                printState();
+                return false;
+            }
         }
 
         if(currentRule.isEnd()) {
             printRule(currentRule,stackToken,currentInputToken);
 
-            System.out.println("Input is valid \n");
+            if (wasError) {
+                System.out.println("Invalid input\n");
+            } else {
+                System.out.println("Input is valid \n");
+            }
             return false;
         }
 
         return true;
+    }
+
+    public boolean recover () {
+        Token currentInputToken = inputQueue.peek();
+        Token stackToken = stack.peek();
+        Rule currentRule = (Rule) transitionTable.get(stackToken,currentInputToken);
+        Terminal end = new Terminal("$");
+
+        int skipped = 0;
+        while( currentRule == null && !currentInputToken.equals(end)) {
+            inputQueue.poll();
+            currentInputToken = inputQueue.peek();
+            currentRule = (Rule) transitionTable.get(stackToken,currentInputToken);
+            skipped++;
+        }
+
+        if(currentInputToken.equals(end)) {
+            System.out.println("Could not recover");
+            return false;
+        } else {
+            System.out.println(String.format("Skipped %d tokens and recoverd",skipped));
+            return true;
+        }
     }
 
     public void printRule(Rule rule, Token stackToken, Token inputToken){

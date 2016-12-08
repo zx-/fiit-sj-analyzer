@@ -13,6 +13,7 @@ import util.FileHandlerUtil;
 public class Main {
 	public static final String INPUT_1 = "input/input1.html";
 	public static final String INPUT_2 = "input/input2.html";
+	public static final String BAD_1 = "input/bad_input.html";
 	
     public static void main(String[] args) {    	
     	SyntaxAnalyzer sa = new SyntaxAnalyzer();
@@ -27,7 +28,7 @@ public class Main {
     	
     	List<Terminal> inputTokens = null;
 		try {
-			inputTokens = la.getTerminalsFromString(FileHandlerUtil.loadFile(INPUT_2));
+			inputTokens = la.getTerminalsFromString(FileHandlerUtil.loadFile(BAD_1));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
