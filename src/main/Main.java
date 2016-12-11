@@ -29,7 +29,7 @@ public class Main {
     	
     	List<Terminal> inputTokens = null;
 		try {
-			inputTokens = la.getTerminalsFromString(FileHandlerUtil.loadFile(INPUT_3));
+			inputTokens = la.getTerminalsFromString(FileHandlerUtil.loadFile(INPUT_1));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

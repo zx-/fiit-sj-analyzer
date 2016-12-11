@@ -85,7 +85,10 @@ public class SyntaxAnalyzer {
         Rule currentRule = (Rule) transitionTable.get(stackToken,currentInputToken);
 
         if(currentRule == null) {
-            System.out.println("Invalid input \nno suitable rule found \n");
+            System.out.println("Invalid input \nno suitable rule found");
+            System.out.println("Stack top: \n\t"+ stackToken);
+            System.out.println("Current input: \n\t"+ currentInputToken.getName());
+            System.out.println();
 
             wasError = true;
 
